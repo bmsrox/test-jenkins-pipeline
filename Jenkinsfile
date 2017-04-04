@@ -17,13 +17,24 @@ node {
     }
 }
 
+def getEnvironment() {
+    def branch = ${env.BRANCH_NAME}
+    if (branch == "master") {
+        return "Production"
+    } else if (branch == "staging") {
+        return "Staging"
+    } else {
+        return "Development"
+    }
+}
 
 def notifyStatus(String status) {
 
+    def enviroment = getEnvironment()
     status = status ?: 'SUCCESS'
 
     if (status == 'SUCCESS') {
-        message = "Uma nova versão do software esta liberada no ambiente de '${env.BRANCH_NAME}'"
+        message = "Uma nova versão do software esta liberada no ambiente de '${enviroment}'"
     } else {
         message = "Ocorreu algo errado no pipeline! Favor verificar."
     }
