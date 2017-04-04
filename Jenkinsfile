@@ -18,7 +18,7 @@ node {
 }
 
 def getEnvironment() {
-    def branch = ${env.BRANCH_NAME}
+    def branch = "${env.BRANCH_NAME}"
     if (branch == "master") {
         return "Production"
     } else if (branch == "staging") {
