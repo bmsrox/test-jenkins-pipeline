@@ -34,9 +34,9 @@ def notifyStatus(String status) {
     status = status ?: 'SUCCESS'
 
     if (status == 'SUCCESS') {
-        message = "Uma nova versão do software esta liberada no ambiente de '${enviroment}'"
+        message = "A new software version has been released in '${enviroment}'"
     } else {
-        message = "Ocorreu algo errado no pipeline! Favor verificar."
+        message = "Something went wrong on project build! Please check it. '${env.BUILD_URL}'"
     }
 
     sendEmail(message, status)
