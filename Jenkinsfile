@@ -23,7 +23,7 @@ def notifyStatus(String status) {
     status = status ?: 'SUCCESS'
 
     if (status == 'SUCCESS') {
-        message = "Uma nova versão do software esta liberada no ambiente de '${env.BRANCH_NAME}'"
+        message = "Uma nova versão do software esta liberada no ambiente de '${GIT_BRANCH}'"
     } else {
         message = "Ocorreu algo errado no pipeline! Favor verificar."
     }
