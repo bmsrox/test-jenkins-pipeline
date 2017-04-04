@@ -20,10 +20,11 @@ node {
 
 def notifyStatus(String status) {
 
+    branch = scm.branches[0].name
     status = status ?: 'SUCCESS'
 
     if (status == 'SUCCESS') {
-        message = "Uma nova versão do software esta liberada no ambiente de '${BRANCH_NAME}'"
+        message = "Uma nova versão do software esta liberada no ambiente de '${branch}'"
     } else {
         message = "Ocorreu algo errado no pipeline! Favor verificar."
     }
