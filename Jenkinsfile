@@ -46,7 +46,7 @@ def sendEmail(String message, String statusName) {
     mail (
         to: "bms_sp@hotmail.com",
         cc: "bmsrox@gmail.com",
-        subject: "${statusName}: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'",
+        subject: "${statusName}: Job '${env.JOB_NAME}' [${env.BUILD_NUMBER}]",
         mimeType: 'text/html',
         body: message
     );
