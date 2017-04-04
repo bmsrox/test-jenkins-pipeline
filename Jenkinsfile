@@ -20,7 +20,6 @@ node {
 
 def notifyStatus(String status) {
 
-    def branch = scm.branches[0].name
     status = status ?: 'SUCCESS'
 
     if (status == 'SUCCESS') {
