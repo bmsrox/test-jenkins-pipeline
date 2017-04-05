@@ -1,53 +1,32 @@
-node {
-    try {
-        stage("Checkout") {
-           checkout scm
-        }
-        stage("test") {
-           echo "Test"
-        }
-        stage("deploy") {
-            echo "Deploy"
-        }
-    } catch (e) {
-        currentBuild.result = "FAILED"
-        throw e
-    } finally {
-        notifyStatus(currentBuild.result)
-    }
+node() {
+  passedBuilds = []
+
+  lastSuccessfulBuild(passedBuilds, currentBuild);
+
+  def changeLog = getChangeLog(passedBuilds)
+  echo "changeLog ${changeLog}"
 }
 
-def getEnvironment() {
-    def branch = "${env.BRANCH_NAME}"
-    if (branch == "master") {
-        return "Production"
-    } else if (branch == "staging") {
-        return "Staging"
-    } else {
-        return "Development"
-    }
+def lastSuccessfulBuild(passedBuilds, build) {
+  if ((build != null) && (build.result != 'SUCCESS')) {
+      passedBuilds.add(build)
+      lastSuccessfulBuild(passedBuilds, build.getPreviousBuild())
+   }
 }
 
-def notifyStatus(String status) {
-
-    def enviroment = getEnvironment()
-    status = status ?: 'SUCCESS'
-
-    if (status == 'SUCCESS') {
-        message = "A new software version has been released in '${enviroment}'"
-    } else {
-        message = "Something went wrong on project build! Please check it. '${env.BUILD_URL}'"
+@NonCPS
+def getChangeLog(passedBuilds) {
+    def log = ""
+    for (int x = 0; x < passedBuilds.size(); x++) {
+        def currentBuild = passedBuilds[x];
+        def changeLogSets = currentBuild.rawBuild.changeSets
+        for (int i = 0; i < changeLogSets.size(); i++) {
+            def entries = changeLogSets[i].items
+            for (int j = 0; j < entries.length; j++) {
+                def entry = entries[j]
+                log += "* ${entry.msg} by ${entry.author} \n"
+            }
+        }
     }
-
-    sendEmail(message, status)
-}
-
-def sendEmail(String message, String statusName) {
-    mail (
-        to: "bms_sp@hotmail.com",
-        cc: "bmsrox@gmail.com",
-        subject: "${statusName}: Job '${env.JOB_NAME}' [${env.BUILD_NUMBER}]",
-        mimeType: 'text/html',
-        body: message
-    );
+    return log;
 }
