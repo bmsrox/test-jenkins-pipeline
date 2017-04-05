@@ -14,7 +14,6 @@ def lastSuccessfulBuild(passedBuilds, build) {
    }
 }
 
-@NonCPS
 def getChangeLog(passedBuilds) {
     def log = ""
     for (int x = 0; x < passedBuilds.size(); x++) {
