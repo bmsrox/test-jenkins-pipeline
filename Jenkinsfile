@@ -4,7 +4,7 @@ node {
            checkout scm
         }
         stage("test") {
-           print currentBuild.rawBuild.changeSets
+           echo "Test"
         }
         stage("deploy") {
             echo "Deploy"
