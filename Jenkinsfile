@@ -1,18 +1,16 @@
 node {
     try {
-        
-        environment = getEnvironment()
-        
-        properties([parameters([string(name: 'LIB_VERSION', defaultValue: 'master')])])
+           
+        properties([parameters([string(name: 'ENV', defaultValue: getEnvironment())])])
         
         stage("Checkout") {
            checkout scm
         }
         stage("test") {
-            echo "${params.LIB_VERSION}"
+            echo "${params.ENV}"
         }
         stage("deploy") {
-            echo "Deploy to ${environment}"
+            echo "Deploy to ${params.ENV}"
         }
     } catch (e) {
         currentBuild.result = "FAILED"
