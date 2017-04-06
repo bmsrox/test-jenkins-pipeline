@@ -10,6 +10,15 @@ pipeline {
                 echo getEnvironment()
             }
         }
+        stage('Build') {
+            steps {
+               if (fileExists('README.md')) {
+                   echo "Existe"
+               } else {
+                   echo "Não existe"
+               }
+            }
+        }
     }
     post {
         success {
