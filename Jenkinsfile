@@ -6,11 +6,5 @@ pipeline {
                 echo 'Hello World'
             }
         }
-        stage('Example Deploy') {
-            when {
-                branch 'master'
-            }
-                echo 'Deploying'
-        }
     }
 }
