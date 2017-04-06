@@ -1,42 +1,15 @@
-pipeline {
-    agent any
-    stages {
-        /* "Build" and "Test" stages omitted */
-
-        stage('Deploy - Staging') {
-            steps {
-                echo "Deploy to Staging"
-            }
-        }
-
-        stage('Sanity check') {
-            steps {
-                input "Does the staging environment look ok?"
-            }
-        }
-
-        stage('Deploy - Production') {
-            steps {
-                echo "Deploy to Prodution"
-            }
-        }
-    }
-}
-/*node {
+node {
     try {
         
         environment = getEnvironment()
         
-        environment {
-            DISABLE_AUTH = 'true'
-            DB_ENGINE    = 'sqlite'
-        }
+        properties([parameters([string(name: 'LIB_VERSION', defaultValue: 'master')])])
         
         stage("Checkout") {
            checkout scm
         }
         stage("test") {
-           echo "${env.DEVS_MAIL}"
+            echo "${params.LIB_VERSION}"
         }
         stage("deploy") {
             echo "Deploy to ${environment}"
@@ -80,4 +53,3 @@ def sendEmail(String message, String statusName) {
         body: message
     );
 }
-*/
