@@ -11,12 +11,8 @@ pipeline {
             }
         }
         stage('Build') {
-            node() {
-                   if (fileExists('README.md')) {
-                       echo "Existe"
-                   } else {
-                       echo "Não Existe"
-                   }
+            steps {
+                build()
             }
         }
     }
@@ -29,6 +25,15 @@ pipeline {
         }
     }
 }
+
+def build() {
+   if (fileExists('README.md')) {
+       echo "Existe"
+   } else {
+       echo "Não Existe"
+   }
+}
+
 def getEnvironment() {
     def branch = "${env.BRANCH_NAME}"
     if (branch == "master") {
