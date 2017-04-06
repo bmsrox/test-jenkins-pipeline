@@ -1,12 +1,10 @@
 pipeline {
     agent any
-    parameters {
-        string(name: 'PERSON', defaultValue: """${getEnvironment()}""", description: 'Who should I say hello to?')
-    }
+    properties([parameters([string(name: 'LIB_VERSION', defaultValue: 'master')])])
     stages {
         stage('Example') {
             steps {
-                echo "Hello ${params.PERSON}"
+                echo "Hello ${params.LIB_VERSION}"
             }
         }
     }
