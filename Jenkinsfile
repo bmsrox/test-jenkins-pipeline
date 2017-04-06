@@ -1,10 +1,15 @@
 pipeline {
     agent any
+    parameters {
+        string(name: 'ENV', defaultValue: getEnvironment())
+    }
     stages {
+        stage ("Checkout") {
+            
+        }
         stage('Example Build') {
-            def server = getEnvironment().toLowerCase()
             steps {
-                echo server
+                echo ${params.ENV}
             }
         }
     }
