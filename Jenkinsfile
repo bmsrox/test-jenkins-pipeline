@@ -12,7 +12,7 @@ pipeline {
         }
         stage('Build') {
             steps {
-                buildProject
+                echo buildProject
             }
         }
     }
@@ -28,9 +28,9 @@ pipeline {
 
 def buildProject() {
    if (fileExists('README.md')) {
-       echo "Existe"
+       return "Existe"
    } else {
-       echo "Não Existe"
+       return "Não Existe"
    }
 }
 
