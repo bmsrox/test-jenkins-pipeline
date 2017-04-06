@@ -1,7 +1,7 @@
 pipeline {
     agent any
     parameters {
-        string(name: 'ENV', defaultValue: ${getEnvironment()})
+        string(name: 'ENV', defaultValue: "${getEnvironment()}")
     }
     stages {
         stage('Example Build') {
