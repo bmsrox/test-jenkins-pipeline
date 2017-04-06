@@ -11,13 +11,15 @@ pipeline {
             }
         }
         stage('Build') {
-            steps {
-               if (fileExists('README.md')) {
-                   echo "Existe"
-               } else {
-                   echo "Não existe"
+           if (fileExists('README.md')) {
+               steps {
+                    echo "Existe"
                }
-            }
+           } else {
+               steps {
+                    echo "Não existe"
+               }
+           }
         }
     }
     post {
