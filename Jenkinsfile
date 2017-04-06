@@ -1,12 +1,8 @@
 pipeline {
     agent any
-    properties([
-        parameters([
-            string(name: 'REQUESTER_MAIL', defaultValue: 'rafael.araujo@ftd.com.br'),
-            string(name: 'DEVS_MAIL', defaultValue: 'bruno.santos@ftd.com.br, marcos.tavares@ftd.com.br'),
-            string(name: 'ENV', defaultValue: getEnvironment())
-        ])
-    ])
+    
+    properties([parameters([string(defaultValue: 'rafael.araujo@ftd.com.br', description: '', name: 'REQUESTER_MAIL'), string(defaultValue: 'bruno.santos@ftd.com.br, marcos.tavares@ftd.com.br', description: '', name: 'DEVS_MAIL'), string(defaultValue: 'getEnvironment()', description: '', name: 'ENV')])])
+    
     stages {
         stage('Get Envs') {
             steps {
