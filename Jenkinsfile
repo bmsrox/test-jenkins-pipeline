@@ -15,6 +15,13 @@ pipeline {
                 sh buildProject()
             }
         }
+        
+        stage ('Test') {
+            steps {
+                sh "export ENV_TEST=${getEnvironment()}"
+                sh "echo $ENV_TEST"
+            }
+        }
     }
     post {
         success {
