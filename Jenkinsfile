@@ -1,7 +1,36 @@
-node {
+pipeline {
+    agent any
+    stages {
+        /* "Build" and "Test" stages omitted */
+
+        stage('Deploy - Staging') {
+            steps {
+                echo "Deploy to Staging"
+            }
+        }
+
+        stage('Sanity check') {
+            steps {
+                input "Does the staging environment look ok?"
+            }
+        }
+
+        stage('Deploy - Production') {
+            steps {
+                echo "Deploy to Prodution"
+            }
+        }
+    }
+}
+/*node {
     try {
         
         environment = getEnvironment()
+        
+        environment {
+            DISABLE_AUTH = 'true'
+            DB_ENGINE    = 'sqlite'
+        }
         
         stage("Checkout") {
            checkout scm
@@ -51,3 +80,4 @@ def sendEmail(String message, String statusName) {
         body: message
     );
 }
+*/
