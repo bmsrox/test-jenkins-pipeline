@@ -1,7 +1,7 @@
 pipeline {
     agent any
     parameters {
-        string(name: 'LIB_VERSION', defaultValue: 'master')
+        string(name: 'LIB_VERSION', defaultValue: getEnvironment())
     }
     stages {
         stage('Example') {
