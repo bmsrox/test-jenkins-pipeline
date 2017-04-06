@@ -1,25 +1,13 @@
 pipeline {
     agent any
-    
-    options {
-        parameters([string(defaultValue: 'rafael.araujo@ftd.com.br', description: '', name: 'REQUESTER_MAIL'), string(defaultValue: 'bruno.santos@ftd.com.br, marcos.tavares@ftd.com.br', description: '', name: 'DEVS_MAIL'), string(defaultValue: 'getEnvironment()', description: '', name: 'ENV')])
+    parameters {
+        string(name: 'PERSON', defaultValue: getEnvironment(), description: 'Who should I say hello to?')
     }
-    
     stages {
-        stage('Get Envs') {
+        stage('Example') {
             steps {
-                echo ${params.REQUESTER_MAIL}
-                echo ${params.DEVS_MAIL}
-                echo ${params.ENV}
+                echo "Hello ${params.PERSON}"
             }
-        }
-    }
-    post {
-        success {
-            echo 'I succeeeded!'
-        }
-        failure {
-            echo 'I failed :('
         }
     }
 }
