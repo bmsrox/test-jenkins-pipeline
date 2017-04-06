@@ -2,8 +2,8 @@ pipeline {
     agent any
     stages {
         stage('Example Build') {
+            def server = getEnvironment().toLowerCase()
             steps {
-                def server = getEnvironment().toLowerCase()
                 echo server
             }
         }
