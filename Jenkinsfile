@@ -7,7 +7,16 @@ pipeline {
         stage('Example') {
             steps {
                 echo params.LIB_VERSION
+                echo getEnvironment()
             }
+        }
+    }
+    post {
+        success {
+            echo 'I succeeeded!'
+        }
+        failure {
+            echo 'I failed'
         }
     }
 }
