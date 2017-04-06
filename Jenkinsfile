@@ -1,12 +1,12 @@
 pipeline {
     agent any
     parameters {
-        string(name: 'LIB_VERSION', defaultValue: '')
+        string(name: 'LIB_VERSION', defaultValue: 'Test')
     }
     stages {
         stage('Example') {
             steps {
-                echo "Hello ${getEnvironment().toLowerCase()}"
+                echo ${params.LIB_VERSION}
             }
         }
     }
