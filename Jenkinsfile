@@ -1,12 +1,10 @@
 pipeline {
     agent any
-    parameters {
-        string(name: 'ENV', defaultValue: 'test')
-    }
+
     stages {
         stage('Example Build') {
             steps {
-                echo ${params.ENV}
+                echo getEnvironment().toLowerCase()
             }
         }
     }
