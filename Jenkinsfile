@@ -1,4 +1,41 @@
-node {
+pipeline {
+    agent any
+    properties([
+       parameters([
+            string(name: 'REQUESTER_MAIL', defaultValue: 'rafael.araujo@ftd.com.br'),
+            string(name: 'DEVS_MAIL', defaultValue: 'bruno.santos@ftd.com.br, marcos.tavares@ftd.com.br'),
+            string(name: 'ENV', defaultValue: getEnvironment()),
+       ])
+    ])
+    stages {
+        stage('Get Envs') {
+            steps {
+                echo ${params.REQUESTER_MAIL}
+                echo ${params.DEVS_MAIL}
+                echo ${params.ENV}
+            }
+        }
+    }
+    post {
+        success {
+            echo 'I succeeeded!'
+        }
+        failure {
+            echo 'I failed :('
+        }
+    }
+}
+def getEnvironment() {
+    def branch = "${env.BRANCH_NAME}"
+    if (branch == "master") {
+        return "Production"
+    } else if (branch == "staging") {
+        return "Staging"
+    } else {
+        return "Development"
+    }
+}
+/*node {
     try {
            
         properties([parameters([string(name: 'ENV', defaultValue: getEnvironment())])])
@@ -51,3 +88,4 @@ def sendEmail(String message, String statusName) {
         body: message
     );
 }
+*/
