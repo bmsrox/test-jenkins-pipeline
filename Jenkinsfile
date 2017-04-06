@@ -11,15 +11,14 @@ pipeline {
             }
         }
         stage('Build') {
-           if (fileExists('README.md')) {
-               steps {
-                    echo "Existe"
-               }
-           } else {
-               steps {
-                    echo "Não existe"
-               }
-           }
+            when {
+                expression {
+                    return fileExists('README.md')
+                }
+            }
+            steps {
+                echo "Existe"
+            }
         }
     }
     post {
