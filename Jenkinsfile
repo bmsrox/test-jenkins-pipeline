@@ -5,7 +5,7 @@ node(){
         echo env
     }
     stage("Test 2") {
-        echo env.toLowerCase()
+        sh 'echo ${env.toLowerCase()}'
     }
 }
 
