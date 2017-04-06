@@ -3,7 +3,9 @@ pipeline {
     stages {
         stage('Example Build') {
             steps {
-                echo getEnvironment()
+                def myStr = "mystring"
+                myStr = "\u\L" + myStr      
+                println myStr
             }
         }
     }
