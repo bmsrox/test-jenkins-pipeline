@@ -13,7 +13,7 @@ pipeline {
         stage('Build') {
             when {
                 expression {
-                    return fileExists('README.md')
+                    return fileExists('TEST.md')
                 }
             }
             steps {
