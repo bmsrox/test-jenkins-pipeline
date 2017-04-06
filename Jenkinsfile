@@ -11,7 +11,6 @@ pipeline {
                 branch 'master'
             }
                 echo 'Deploying'
-            }
         }
     }
 }
