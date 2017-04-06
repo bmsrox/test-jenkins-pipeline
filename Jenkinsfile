@@ -1,12 +1,12 @@
 pipeline {
     agent any
     parameters {
-        string(name: 'LIB_VERSION', defaultValue: getEnvironment())
+        string(name: 'LIB_VERSION', defaultValue: '')
     }
     stages {
         stage('Example') {
             steps {
-                echo "Hello ${params.LIB_VERSION}"
+                echo "Hello ${getEnvironment()}"
             }
         }
     }
