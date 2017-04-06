@@ -19,6 +19,9 @@ pipeline {
             steps {
                 echo "Existe"
             }
+            steps {
+                echo "Não existe"
+            }
         }
     }
     post {
