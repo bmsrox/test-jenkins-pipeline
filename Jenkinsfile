@@ -6,7 +6,7 @@ pipeline {
     stages {
         stage('Example') {
             steps {
-                echo "Hello ${getEnvironment()}"
+                echo "Hello ${getEnvironment().toLowerCase()}"
             }
         }
     }
