@@ -1,6 +1,8 @@
 pipeline {
     agent any
-    properties([parameters([string(name: 'LIB_VERSION', defaultValue: 'master')])])
+    parameters {
+        string(name: 'LIB_VERSION', defaultValue: 'master')
+    }
     stages {
         stage('Example') {
             steps {
