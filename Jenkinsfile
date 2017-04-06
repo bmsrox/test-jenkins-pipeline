@@ -7,7 +7,7 @@ node {
            checkout scm
         }
         stage("test") {
-           echo "${env.GIT_COMMIT}"
+           echo "${env.DEVS_MAIL}"
         }
         stage("deploy") {
             echo "Deploy to ${environment}"
