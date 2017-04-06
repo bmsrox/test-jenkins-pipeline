@@ -1,7 +1,7 @@
 pipeline {
     agent any
     parameters {
-        string(name: 'ENV', defaultValue: "${env.BRANCH_NAME}")
+        string(name: 'ENV', defaultValue: '"${env.BRANCH_NAME}"')
     }
     stages {
         stage('Example Build') {
