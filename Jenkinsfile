@@ -1,11 +1,22 @@
-node(){
-    def env = getEnvironment()
-    
-    stage("Test 1") {
-        echo env
-    }
-    stage("Test 2") {
-        sh 'echo "${env.toLowerCase()}"'
+node {
+    try {
+        
+        environment = getEnvironment()
+        
+        stage("Checkout") {
+           checkout scm
+        }
+        stage("test") {
+           echo 'Testing ${environment}'
+        }
+        stage("deploy") {
+            echo 'Deploy to ${environment}'
+        }
+    } catch (e) {
+        currentBuild.result = "FAILED"
+        throw e
+    } finally {
+        notifyStatus(currentBuild.result)
     }
 }
 
@@ -18,4 +29,25 @@ def getEnvironment() {
     } else {
         return "Development"
     }
+}
+
+def notifyStatus(String status) {
+    status = status ?: 'SUCCESS'
+
+    if (status == 'SUCCESS') {
+        message = "A new software version has been released in '${environment}'"
+    } else {
+        message = "Something went wrong on project build! Please check it. '${env.BUILD_URL}'"
+    }
+
+    sendEmail(message, status)
+}
+
+def sendEmail(String message, String statusName) {
+    mail (
+        to: "bmsrox@gmail.com, bms_sp@hotmail.com",
+        subject: "${statusName}: Job '${env.JOB_NAME}' [${env.BUILD_NUMBER}]",
+        mimeType: 'text/html',
+        body: message
+    );
 }
