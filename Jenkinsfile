@@ -1,12 +1,11 @@
-pipeline {
-    agent any
-
-    stages {
-        stage('Example Build') {
-            steps {
-                echo getEnvironment().toLowerCase()
-            }
-        }
+node(){
+    def env = getEnvironment()
+    
+    stage("Test 1") {
+        echo env
+    }
+    stage("Test 2") {
+        echo env.toLowerCase()
     }
 }
 
