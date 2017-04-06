@@ -7,10 +7,10 @@ node {
            checkout scm
         }
         stage("test") {
-           echo 'Testing ${environment}'
+           echo 'Testing "${environment}"'
         }
         stage("deploy") {
-            echo 'Deploy to ${environment}'
+            echo 'Deploy to "${environment}"'
         }
     } catch (e) {
         currentBuild.result = "FAILED"
