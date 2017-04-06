@@ -4,9 +4,6 @@ pipeline {
         string(name: 'ENV', defaultValue: getEnvironment())
     }
     stages {
-        stage ("Checkout") {
-            
-        }
         stage('Example Build') {
             steps {
                 echo ${params.ENV}
