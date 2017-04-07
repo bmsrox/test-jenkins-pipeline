@@ -1,12 +1,12 @@
 pipeline {
     agent any
     parameters {
-        string(name: 'LIB_VERSION', defaultValue: 'Test')
+        string(name: 'EMAIL', defaultValue: 'bruno.santos@ftd.com.br')
     }
     stages {
         stage('Example') {
             steps {
-                echo params.LIB_VERSION
+                echo params.EMAIL
                 echo getEnvironment()
             }
         }
@@ -24,18 +24,22 @@ pipeline {
     }
     post {
         success {
-            echo notifyStatus()
-            echo 'I succeeeded!'
+            mail (
+                to: params.EMAIL,
+                subject: "SUCCESS: Job '${env.JOB_NAME}' [${env.BUILD_NUMBER}]",
+                mimeType: 'text/html',
+                body: "A new software version has been released!"
+            );
         }
         failure {
-            echo notifyStatus()
-            echo 'I failed'
+            mail (
+                to: params.EMAIL,
+                subject: "FAILURE: Job '${env.JOB_NAME}' [${env.BUILD_NUMBER}]",
+                mimeType: 'text/html',
+                body: "Something went wrong!"
+            );
         }
     }
-}
-
-def notifyStatus() {
-    return params.LIB_VERSION
 }
 
 def buildProject() {
