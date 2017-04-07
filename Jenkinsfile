@@ -19,6 +19,7 @@ pipeline {
         stage ('Test') {
             steps {
                 sh "export ENV_TEST=${getEnvironment()}"
+                print showCommit()
             }
         }
     }
@@ -40,6 +41,13 @@ pipeline {
             );
         }
     }
+}
+
+def showCommit() {
+gitCommit = sh(returnStdout: true, script: 'git rev-parse HEAD').trim()
+// short SHA, possibly better for chat notifications, etc.
+shortCommit = gitCommit.take(6)
+    return shortCommit
 }
 
 def buildProject() {
