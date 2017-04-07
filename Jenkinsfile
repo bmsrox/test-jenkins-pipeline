@@ -24,12 +24,18 @@ pipeline {
     }
     post {
         success {
+            echo notify()
             echo 'I succeeeded!'
         }
         failure {
+            echo notify()
             echo 'I failed'
         }
     }
+}
+
+def notify() {
+    return params.LIB_VERSION
 }
 
 def buildProject() {
