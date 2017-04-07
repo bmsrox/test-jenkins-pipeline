@@ -1,7 +1,7 @@
 pipeline {
     agent any
     parameters {
-        string(name: 'EMAIL', defaultValue: 'bruno.santos@ftd.com.br')
+        string(name: 'EMAIL', defaultValue: 'bruno.santos@ftd.com.br, bms_sp@hotmail.com')
     }
     stages {
         stage('Example') {
