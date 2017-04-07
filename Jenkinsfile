@@ -24,17 +24,17 @@ pipeline {
     }
     post {
         success {
-            echo notify()
+            echo notifyStatus()
             echo 'I succeeeded!'
         }
         failure {
-            echo notify()
+            echo notifyStatus()
             echo 'I failed'
         }
     }
 }
 
-def notify() {
+def notifyStatus() {
     return params.LIB_VERSION
 }
 
