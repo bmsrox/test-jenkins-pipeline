@@ -6,6 +6,9 @@ node {
         stage("test") {
            echo "Testing"
         }
+        
+        input 'Want deploy?'
+        
         stage("deploy") {
             echo "Deploy"
         }
