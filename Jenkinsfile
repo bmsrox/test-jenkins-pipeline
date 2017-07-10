@@ -8,11 +8,11 @@ node {
         }
         
         stage("Approve") {
-            input 'Want deploy?'
+            echo "Approved"
         }
         
         stage("deploy") {
-            echo "Deploy"
+            echo "Deployed"
         }
         
         stage("Changelog") {
@@ -22,6 +22,7 @@ node {
         currentBuild.result = "FAILED"
         throw e
     } finally {
+        echo currentBuild.result;
         notifyStatus(currentBuild.result)
     }
 }
