@@ -16,7 +16,7 @@ node {
         }
         
         stage("Changelog") {
-            echo getChangeString()
+            echo currentBuild.changeSets
         }
     } catch (e) {
         currentBuild.result = "FAILED"
