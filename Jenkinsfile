@@ -16,13 +16,12 @@ node {
         }
         
         stage("Changelog") {
-            echo currentBuild.changeSets
+            echo currentBuild.rawBuild.changeSets
         }
     } catch (e) {
         currentBuild.result = "FAILED"
         throw e
     } finally {
-        echo currentBuild.result;
         notifyStatus(currentBuild.result)
     }
 }
