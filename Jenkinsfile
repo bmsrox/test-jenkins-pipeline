@@ -18,7 +18,7 @@ node {
         currentBuild.result = "FAILED"
         throw e
     } finally {
-        print currentBuild.rawBuild.changeSets
+        print currentBuild.rawBuild
        // notifyStatus(currentBuild.result)
     }
 }
