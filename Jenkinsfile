@@ -17,9 +17,9 @@ node {
     } catch (e) {
         currentBuild.result = "FAILED"
         throw e
-    } finally {
+    } /*finally {
         notifyStatus(currentBuild.result)
-    }
+    }*/
 }
 
 def getEnvironment() {
