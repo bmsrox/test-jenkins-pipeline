@@ -14,10 +14,6 @@ node {
         stage("deploy") {
             echo "Deployed"
         }
-        
-        stage("Changelog") {
-            echo currentBuild.rawBuild.changeSets
-        }
     } catch (e) {
         currentBuild.result = "FAILED"
         throw e
