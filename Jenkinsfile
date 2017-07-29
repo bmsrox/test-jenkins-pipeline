@@ -3,7 +3,7 @@ node {
         stage("Checkout") {
            checkout scm
         }
-        stage("test") {
+        stage("Test") {
            echo "Testing"
         }
         
@@ -11,8 +11,12 @@ node {
             echo "Approved"
         }
         
-        stage("deploy") {
+        stage("Deploy") {
             echo "Deployed"
+        }
+        
+        stage("Notify") {
+            notifyStatus("SUCCESS")
         }
     } catch (e) {
         currentBuild.result = "FAILED"
