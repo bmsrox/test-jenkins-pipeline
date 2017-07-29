@@ -20,7 +20,7 @@ node {
         }
     } catch (e) {
         currentBuild.result = "FAILED"
-        throw e
+       // throw e
     } finally {
         print currentBuild.result
        // notifyStatus(currentBuild.result)
