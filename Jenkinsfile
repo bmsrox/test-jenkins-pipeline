@@ -17,9 +17,10 @@ node {
     } catch (e) {
         currentBuild.result = "FAILED"
         throw e
-    } /*finally {
-        notifyStatus(currentBuild.result)
-    }*/
+    } finally {
+        print currentBuild.changeSets
+       // notifyStatus(currentBuild.result)
+    }
 }
 
 def getEnvironment() {
