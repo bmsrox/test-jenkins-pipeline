@@ -11,8 +11,10 @@ pipeline {
             }
         }
         stage('Build') {
-            input {
-                message "Should we continue?"
+            timeout(time:10, unit: 'SECONDS') {
+                input {
+                    message "Should we continue?"
+                }
             }
             steps {
                 echo "Project built"
@@ -26,7 +28,7 @@ pipeline {
             }
         }
     }
-    post {
+    /*post {
         success {
             mail (
                 to: params.EMAIL,
@@ -43,7 +45,7 @@ pipeline {
                 body: "Something went wrong!"
             );
         }
-    }
+    }*/
 }
 
 def showCommit() {
