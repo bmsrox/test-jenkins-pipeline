@@ -11,8 +11,11 @@ pipeline {
             }
         }
         stage('Build') {
+            input {
+                message "Should we continue?"
+            }
             steps {
-                sh buildProject()
+                echo "Project built"
             }
         }
         
@@ -48,14 +51,6 @@ gitCommit = sh(returnStdout: true, script: 'git rev-parse HEAD').trim()
 // short SHA, possibly better for chat notifications, etc.
 shortCommit = gitCommit.take(6)
     return shortCommit
-}
-
-def buildProject() {
-   if (fileExists('README.md')) {
-       return "php -v"
-   } else {
-       return "echo $USER"
-   }
 }
 
 def getEnvironment() {
