@@ -1,4 +1,4 @@
-node {
+/*node {
     try {
         stage("Checkout") {
            checkout scm
@@ -61,3 +61,4 @@ def sendEmail(String message, String statusName) {
         body: message
     );
 }
+*/
